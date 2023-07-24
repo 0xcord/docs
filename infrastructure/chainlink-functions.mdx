@@ -1,0 +1,134 @@
+---
+title: Chainlink Functions
+description: Learn how to use Chainlink Functions with 0xCord, both onchain and offchain.
+---
+
+Welcome to the get started tutorial for using Chainlink Functions with 0xCord! In this tutorial, we will walk you through the process of integrating Chainlink Functions into your decentralized applications using the powerful infrastructure provided by 0xCord. By leveraging 0xCord's simplified workflows and API capabilities, you can easily generate provably random numbers for your Web3 applications.
+
+## Prerequisites
+
+To get started with Chainlink Functions and 0xCord, you will need the following:
+- An account on 0xCord.com: Sign up for an account on [0xCord.com](https://0xCord.com) to access the infrastructure and services provided by 0xCord.
+- Provisioned Chainlink Functions: Follow the steps outlined in the [Get started](/hello-world) page to provision Chainlink Functions for your application.
+
+Usually, using Chainlink Functions onchain requires several steps, such as acquiring gas tokens, $LINK tokens, creating subscriptions, and managing subscription balances. But with 0xCord, we simplify the process by provisioning and managing the subscriptions for you - no crypto required! Here's how to use Chainlink Functions with 0xCord:
+
+## Offchain API
+
+With 0xCord's offchain API, you can easily consume Chainlink Functions through a simple RESTful JSON API call, bridging the gap between Web2 and decentralized Web3 infrastructure. This allows you to easily run your functions via Chainlink Functions, ensuring the integrity of the results.
+
+### Using the Offchain API
+To get started with the offchain API, follow these steps:
+
+1. Prepare your code: Write the JavaScript code for your Chainlink Function. This code can range from simple computations to more complex operations that involve fetching data from external API providers. For example: 
+
+	```javascript
+	const firstArg = args[0];
+	const secondArg = args[1]; 
+	const message = `Hello 0xCord ${firstArg}${secondArg}`; 
+	return Buffer.from(message)
+	```
+
+2. Copy the API key from the "Fetch Config Vars" section in the 0xCord app. This API key will be used to access the 0xCord RESTful JSON API. [More info](/api-reference/authentication).
+3. In your API client, make a POST request to the Run Function" API call to submit your Chainlink Function code and any necessary parameters. The request should include the desired `network`, the function code, the desired return type, and any arguments required by the function. For example: 
+
+```bash
+curl --location --request POST 'https://0xcord.com/api/chainlinkFunctions/runFunction' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "network": "sepolia",
+  "source": "const firstArg = args[0]; const secondArg = args[1]; const message = `Hello 0xCord ${firstArg}${secondArg}`; return Buffer.from(message)",
+  "args": ["10", "X"],
+  "returnType": "string"
+}'
+```
+
+Example response:
+```json
+{
+  "data": {
+    "success": true,
+    "requestId": "0x342ceca72b486dae8bdffcea7bd50a61b1b6e9b0bb67d1666b8ac7bd82252331",
+    "result": "0x48656c6c6f203078436f726420313058",
+    "parsedResult": "Hello 0xCord 10X",
+    "err": "0x",
+    "url": "https://sepolia.etherscan.io/tx/0x20b63b13f8d39c6841dc30e0d64f08976671f484b8b5c7a0a5fe75b5af16054c"
+  }
+}
+```
+
+The `parsedResult` is provably verifiable on-chain and ready to use in your application.
+
+<Card
+  title="API Reference"
+  href="api-reference/chainlink-functions/run-function"
+>
+  Learn more about the API endpoint for running a function
+</Card>
+
+## Onchain API 
+
+Usually, using Chainlink Functions onchain requires several steps, such as acquiring $LINK tokens, creating subscriptions, and managing subscription balances. But with 0xCord, we simplify the process by provisioning and managing the subscriptions for you! Here's how to use Chainlink Functions onchain with 0xCord. 
+
+### Using the Onchain API
+To get started with the onchain API, follow these steps:
+
+1. Copy Subscription ID:
+   - On the Dapp page, click on "Fetch Config Vars" to view the fully-funded subscriptions that are ready to use.
+   - Identify the subscription ID for the chain where you'll be deploying your contract. For example, on Polygon Mumbai, the subscription ID might be `2894`.
+
+    <CardGroup cols={2}>
+      <img src="/images/chainlink-provisioned.png" />
+      <img src="/images/config-vars.png" />
+    </CardGroup>
+
+2. Configure Your Deployment:
+   - If you're following a [Chainlink VRF tutorial](https://docs.chain.link/vrf/v2/subscription/examples/get-a-random-number), use the copied subscription ID in the deployment configuration.
+   - In Remix's Deploy tab, select the Injected Provider environment and choose the `VRFv2Consumer` contract from the contract list.
+   - Specify the `subscription ID` in the constructor of your contract.
+   - Press the orange deploy button. Metamask will prompt you to sign the transaction. This will deploy the smart contract configured with 0xCord's Chainlink subscription. 
+
+    <CardGroup cols={2}>
+      <img src="/images/remix-compile.png" />
+      <img src="/images/remix-deploy.png" />
+    </CardGroup>
+
+4. Link Your Consumer to the Subscription:
+
+To link your consumer to the subscription, you have two options:
+   1. Option 1: Using the 0xCord App:
+       - Open the 0xCord app and locate the gears icon on the Chainlink instance to open the ChainLink Subscription Consumers modal.
+       - Enter your contract address, select the chain from the dropdown, and click save. This will create a transaction linking your consumer to the chain.
+
+       <CardGroup cols={2}>
+         <img src="/images/chainlink-page.png" />
+       </CardGroup>
+
+   2. Option 2: Programmatically Linking Your Consumer:
+       - Go to the dapp page on 0xCord and copy the dapp ID from the URL parameters.
+       - Authenticate using your API key and make a POST request to the `Add Consumer` endpoint, passing in the network, consumer address, and dapp ID as query parameters. For example: 
+
+       ```bash
+       curl --request POST \
+         --url 'https://0xcord.com/api/vrfv2/addConsumer?dappId=1&network=polygon_mumbai&consumer=0x53470b76D3f57E6C7be40BB333014481ec1c5530' \
+         --header 'Authorization: <apiKey>'
+       ```
+
+         Example response:
+         ```json
+         {
+             "data": {
+                 "success": true,
+                 "transactionHash": "0x1f636827ba3572472e117f8f008b3fc6726c1284c0ceca586e3a0e676f0406eb",
+             }
+         }
+         ```
+
+       You can now starting consuming random numbers from your smart contract!  
+
+      <Card
+        title="API Reference"
+        href="api-reference/chainlink-vrf-v2/add-consumer"
+      >
+        Learn more about the API endpoint for adding consumers
+      </Card>

@@ -1,22 +1,20 @@
 ---
 title: "Authentication"
-description: "Example overview page before API endpoints"
+description: "Authentication methods for accessing the 0xCord API"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+To access the 0xCord API, authentication is required using a bearer token. Include the following header in your API requests:
 
 ```bash
-'Authorization': 'Token <team_token>'
+'Authorization': 'Bearer <bearer_token>'
 ```
 
 ## API Tokens
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+API tokens are used to authenticate API requests to 0xCord. To obtain an API token, please follow the authentication process outlined in the [0xCord documentation](/get-started).
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+## Permissions
 
-### Permissions
+Different API endpoints may require specific permissions to access certain resources or perform specific actions. Ensure that your API token has the necessary permissions to make the desired API requests. For more information on permissions and their requirements, refer to the 0xCord API documentation.
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+For any issues or inquiries regarding authentication or API tokens, please reach out to the [0xCord support team](mailto:contact@0xcord.com).

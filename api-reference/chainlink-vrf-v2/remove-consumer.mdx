@@ -1,0 +1,37 @@
+---
+title: Remove Consumer
+description: API endpoint for Removing a consumer to the Chainlink VRF V2 subscription
+api: "POST https://0xcord.com/api/vrfv2/removeConsumer"
+---
+
+## Params
+
+<ParamField query="dappId" type="integer" required>
+  The ID of the dapp to which the consumer will be unlinked
+</ParamField>
+
+<ParamField query="network" type="string" required>
+  The blockchain network where the consumer will be unlinked (e.g., polygon_mumbai, mainnet)
+</ParamField>
+
+<ParamField query="consumer" type="string" required>
+  The Removeress of the consumer contract to be unlinked
+</ParamField>
+
+## Response
+
+<ResponseField name="data" type="object">
+  <ResponseField name="success" type="boolean">
+    Indicates whether the consumer was successfully unlinked
+  </ResponseField>
+  <ResponseField name="transactionHash" type="string">
+    The transaction hash of the unlinking transaction
+  </ResponseField>
+</ResponseField>
+
+<Card
+  title="Chainlink VRF V2 Tutorial"
+  href="/infrastructure/chainlink-vrf-v2"
+>
+  Learn how to integrate Chainlink VRF V2 with 0xCord
+</Card>

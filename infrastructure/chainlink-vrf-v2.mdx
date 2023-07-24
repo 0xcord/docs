@@ -1,0 +1,118 @@
+---
+title: Chainlink VRF V2
+description: Learn how to use Chainlink VRF V2 with 0xCord, both onchain and offchain.
+---
+
+Welcome to the get started tutorial for using Chainlink VRF V2 with 0xCord! In this tutorial, we will walk you through the process of integrating Chainlink VRF V2 into your decentralized applications using the powerful infrastructure provided by 0xCord. By leveraging 0xCord's simplified workflows and API capabilities, you can easily generate provably random numbers for your Web3 applications.
+
+## Prerequisites
+
+To get started with Chainlink VRF V2 and 0xCord, you will need the following:
+- An account on 0xCord.com: Sign up for an account on [0xCord.com](https://0xCord.com) to access the infrastructure and services provided by 0xCord.
+- Provisioned Chainlink VRF V2: Follow the steps outlined in the [Get started](/hello-world) page to provision Chainlink VRF V2 for your application.
+
+Usually, using Chainlink VRF V2 onchain requires several steps, such as acquiring gas tokens, $LINK tokens, creating subscriptions, and managing subscription balances. But with 0xCord, we simplify the process by provisioning and managing the subscriptions for you - no crypto required! Here's how to use Chainlink VRF V2 with 0xCord:
+
+## Offchain API
+
+With 0xCord's offchain API, you can easily consume Chainlink VRF V2 through a simple RESTful JSON API call, bridging the gap between Web2 and decentralized Web3 infrastructure. This allows you to retrieve random numbers for your applications without the need for complex onchain interactions.
+
+### Using the Offchain API
+To get started with the offchain API, follow these steps:
+
+1. Copy the API key from the "Fetch Config Vars" section in the 0xCord app. This API key will be used to access the 0xCord RESTful JSON API. [More info](/api-reference/authentication).
+2. In your API client, make a POST request to the "Request Random Number" API call, specifying the desired `network` and the number of random numbers to generate using the `numWords` parameter. For example:
+
+```bash
+curl --request POST \
+  --url 'https://0xcord.com/api/vrfv2/requestRandomNumber?network=fantom_testnet&numWords=2' \
+  --header 'Authorization: <apiKey>'
+```
+
+Example response:
+```json
+{
+    "data": {
+        "success": true,
+        "requestId": "82772297461836742329238512432706064630856291450561249462036537828944094389038",
+        "transactionHash": "0x1f636827ba3572472e117f8f008b3fc6726c1284c0ceca586e3a0e676f0406eb",
+        "url": "https://mumbai.polygonscan.com/tx/0x1f636827ba3572472e117f8f008b3fc6726c1284c0ceca586e3a0e676f0406eb"
+    }
+}
+```
+
+The returned random numbers are provably verifiable on-chain and ready to use in your application.
+
+<Card
+  title="API Reference"
+  href="api-reference/chainlink-vrf-v2/request-random-numbers"
+>
+  Learn more about the API endpoint for requesting random numbers
+</Card>
+
+## Onchain API 
+
+Usually, using Chainlink VRF V2 onchain requires several steps, such as acquiring $LINK tokens, creating subscriptions, and managing subscription balances. But with 0xCord, we simplify the process by provisioning and managing the subscriptions for you! Here's how to use Chainlink VRF V2 onchain with 0xCord. 
+
+### Using the Onchain API
+To get started with the onchain API, follow these steps:
+
+1. Copy Subscription ID:
+   - On the Dapp page, click on "Fetch Config Vars" to view the fully-funded subscriptions that are ready to use.
+   - Identify the subscription ID for the chain where you'll be deploying your contract. For example, on Polygon Mumbai, the subscription ID might be `2894`.
+
+    <CardGroup cols={2}>
+      <img src="/images/chainlink-provisioned.png" />
+      <img src="/images/config-vars.png" />
+    </CardGroup>
+
+2. Configure Your Deployment:
+   - If you're following a [Chainlink VRF tutorial](https://docs.chain.link/vrf/v2/subscription/examples/get-a-random-number), use the copied subscription ID in the deployment configuration.
+   - In Remix's Deploy tab, select the Injected Provider environment and choose the `VRFv2Consumer` contract from the contract list.
+   - Specify the `subscription ID` in the constructor of your contract.
+   - Press the orange deploy button. Metamask will prompt you to sign the transaction. This will deploy the smart contract configured with 0xCord's Chainlink subscription. 
+
+    <CardGroup cols={2}>
+      <img src="/images/remix-compile.png" />
+      <img src="/images/remix-deploy.png" />
+    </CardGroup>
+
+4. Link Your Consumer to the Subscription:
+
+To link your consumer to the subscription, you have two options:
+   1. Option 1: Using the 0xCord App:
+       - Open the 0xCord app and locate the gears icon on the Chainlink instance to open the ChainLink Subscription Consumers modal.
+       - Enter your contract address, select the chain from the dropdown, and click save. This will create a transaction linking your consumer to the chain.
+
+       <CardGroup cols={2}>
+         <img src="/images/chainlink-page.png" />
+       </CardGroup>
+
+   2. Option 2: Programmatically Linking Your Consumer:
+       - Go to the dapp page on 0xCord and copy the dapp ID from the URL parameters.
+       - Authenticate using your API key and make a POST request to the `Add Consumer` endpoint, passing in the network, consumer address, and dapp ID as query parameters. For example: 
+
+       ```bash
+       curl --request POST \
+         --url 'https://0xcord.com/api/vrfv2/addConsumer?dappId=1&network=polygon_mumbai&consumer=0x53470b76D3f57E6C7be40BB333014481ec1c5530' \
+         --header 'Authorization: <apiKey>'
+       ```
+
+         Example response:
+         ```json
+         {
+             "data": {
+                 "success": true,
+                 "transactionHash": "0x1f636827ba3572472e117f8f008b3fc6726c1284c0ceca586e3a0e676f0406eb",
+             }
+         }
+         ```
+
+       You can now starting consuming random numbers from your smart contract!  
+
+      <Card
+        title="API Reference"
+        href="api-reference/chainlink-vrf-v2/add-consumer"
+      >
+        Learn more about the API endpoint for adding consumers
+      </Card>

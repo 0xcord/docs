@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0069ED",
-    "light": "#4D9CFF",
-    "dark": "#0050B4"
+    "primary": "#5a165f",
+    "light": "#d15fda",
+    "dark": "#5a165f"
   },
   "topbarLinks": [
     {
@@ -34,32 +34,50 @@
     },
     {
       "name": "Community",
-      "icon": "discord",
-      "url": "https://mintlify.com/community"
+      "icon": "twitter",
+      "url": "https://twitter.com/0xcord"
+    },
+    {
+      "name": "Support",
+      "icon": "envelope",
+      "url": "mailto:contact@0xcord.com"
     }
   ],
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "features"]
+      "pages": ["introduction", "get-started"]
     },
     {
       "group": "API Documentation",
       "pages": ["api-reference/authentication"]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Chainlink VRF V2",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/chainlink-vrf-v2/request-random-numbers",
+        "api-reference/chainlink-vrf-v2/add-consumer",
+        "api-reference/chainlink-vrf-v2/remove-consumer"
       ]
-    }
+    },
+    {
+       "group": "Infrastructure",
+       "pages": [
+         "infrastructure/chainlink-vrf-v2",
+         "infrastructure/chainlink-functions"
+       ]
+     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
+  },
+  "api":{
+    "baseUrl": "https://0xcord.com/api",
+    "auth": {
+      "method": "key",
+      "name": "Authorization"
+    }
   }
 }

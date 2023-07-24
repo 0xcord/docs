@@ -1,0 +1,50 @@
+---
+title: Request Random Numbers
+description: API endpoint for requesting random numbers from Chainlink VRF V2
+api: "POST https://0xcord.com/api/vrfv2/requestRandomNumber"
+---
+
+## Params
+
+<ParamField query="network" type="string" default="fantom_testnet" required>
+  The blockchain network to retrieve random numbers from
+</ParamField>
+
+<ParamField query="numWords" type="integer" default="2" required>
+  The quantity of random numbers to retrieve from Chainlink
+</ParamField>
+
+<ParamField query="confirmations" type="integer" default="2">
+  The number of block confirmations required before returning data
+</ParamField>
+
+<ParamField query="uniqueParam" type="string" placeholder="0x69df71393e8d1044b99274c757b2f2bcba3f9ebd91ec58aa609de6904110be49">
+  The Keccak256 hash of a unique parameter
+</ParamField>
+
+## Response
+
+<ResponseField name="data" type="object">
+  <ResponseField name="success" type="boolean">
+    Indicates whether the request was successful
+  </ResponseField>
+  <ResponseField name="requestId" type="string">
+    The unique request ID assigned by Chainlink
+  </ResponseField>
+  <ResponseField name="transactionHash" type="string">
+    The transaction hash of the request on the blockchain
+  </ResponseField>
+  <ResponseField name="url" type="string">
+    The URL to the transaction details on the blockchain explorer
+  </ResponseField>
+  <ResponseField name="randomNumber" type="array">
+    An array containing the retrieved random numbers
+  </ResponseField>
+</ResponseField>
+
+<Card
+  title="Chainlink VRF V2 Tutorial"
+  href="/infrastructure/chainlink-vrf-v2"
+>
+  Learn how to integrate Chainlink VRF V2 with 0xCord
+</Card>
