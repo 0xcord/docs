@@ -1,16 +1,15 @@
 ---
-title: Add Consumer
-description: API endpoint for adding a consumer to the Chainlink VRF V2 subscription
-api: "POST https://0xcord.com/api/vrfv2/addConsumer"
+title: Functions Add Consumer
+description: API endpoint for adding a consumer to the Chainlink Functions subscription
+api: "POST https://0xcord.com/api/chainlinkFunctions/addConsumer"
 ---
 
 ## Params
 
 <ParamField query="network" type="string" required>
   The blockchain network where the consumer will be linked (e.g.,
-  polygon_mumbai, mainnet)
+  polygon_mumbai, fuji, sepolia)
 </ParamField>
-
 <ParamField query="consumer" type="string" required>
   The address of the consumer contract to be linked
 </ParamField>
@@ -24,8 +23,14 @@ api: "POST https://0xcord.com/api/vrfv2/addConsumer"
   <ResponseField name="transactionHash" type="string">
     The transaction hash of the linking transaction
   </ResponseField>
+  <ResponseField name="url" type="string">
+    The URL to the transaction details on the blockchain explorer
+  </ResponseField>
 </ResponseField>
 
-<Card title="Chainlink VRF V2 Tutorial" href="/infrastructure/chainlink-vrf-v2">
-  Learn how to integrate Chainlink VRF V2 with 0xCord
+<Card
+  title="Chainlink Functions Tutorial"
+  href="/infrastructure/chainlink-functions"
+>
+  Learn how to integrate Chainlink Functions with 0xCord
 </Card>

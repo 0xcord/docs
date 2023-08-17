@@ -19,7 +19,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://github.com/mintlify/starter"
+    "url": "https://0xcord.com/"
   },
   "anchors": [
     {
@@ -30,7 +30,7 @@
     {
       "name": "Changelog",
       "icon": "list",
-      "url": "https://mintlify.com"
+      "url": "changelog"
     },
     {
       "name": "Community",
@@ -53,11 +53,23 @@
       "pages": ["api-reference/authentication"]
     },
     {
+      "group": "Changelog",
+      "pages": ["changelog/changelog"]
+    },
+    {
       "group": "Chainlink VRF V2",
       "pages": [
         "api-reference/chainlink-vrf-v2/request-random-numbers",
         "api-reference/chainlink-vrf-v2/add-consumer",
         "api-reference/chainlink-vrf-v2/remove-consumer"
+      ]
+    },
+    {
+      "group": "Chainlink Functions",
+      "pages": [
+        "api-reference/chainlink-functions/run-function",
+        "api-reference/chainlink-functions/add-consumer",
+        "api-reference/chainlink-functions/remove-consumer"
       ]
     },
     {
@@ -69,9 +81,7 @@
      }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/0xcord"
   },
   "api":{
     "baseUrl": "https://0xcord.com/api",

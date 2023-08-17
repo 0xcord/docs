@@ -1,0 +1,54 @@
+---
+title: Run Chainlink Functions
+description: API endpoint for running source code on the Chainlink oracle network
+api: "POST https://0xcord.com/api/chainlinkFunctions/runFunction"
+---
+
+## Params
+
+<ParamField query="network" type="string" required>
+  The blockchain network you want to run the function on
+</ParamField>
+
+<ParamField query="source" type="string" required>
+  The source code of the function you want to run
+</ParamField>
+
+<ParamField query="args" type="array" default="[]">
+  The arguments for the function, passed as an array of strings
+</ParamField>
+
+<ParamField query="returnType" type="string" default="string">
+  The return type of the function, necessary to decode the result. Can be
+  "string", "uint256", or "int256"
+</ParamField>
+
+## Response
+
+<ResponseField name="data" type="object">
+  <ResponseField name="success" type="boolean">
+    Indicates whether the request was successful
+  </ResponseField>
+  <ResponseField name="requestId" type="string">
+    The unique request ID assigned by Chainlink
+  </ResponseField>
+  <ResponseField name="result" type="string">
+    The result of the function call, encoded as a hexadecimal string
+  </ResponseField>
+  <ResponseField name="parsedResult" type="string">
+    The parsed result of the function call, decoded based on the return type
+  </ResponseField>
+  <ResponseField name="err" type="string">
+    The error message, if any
+  </ResponseField>
+  <ResponseField name="url" type="string">
+    The URL to the transaction details on the blockchain explorer
+  </ResponseField>
+</ResponseField>
+
+<Card
+  title="Chainlink Functions Tutorial"
+  href="/infrastructure/chainlink-functions"
+>
+  Learn how to integrate Chainlink Functions with 0xCord
+</Card>
