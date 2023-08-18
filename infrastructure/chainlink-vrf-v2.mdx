@@ -13,6 +13,30 @@ To get started with Chainlink VRF V2 and 0xCord, you will need the following:
 
 Usually, using Chainlink VRF V2 onchain requires several steps, such as acquiring gas tokens, $LINK tokens, creating subscriptions, and managing subscription balances. But with 0xCord, we simplify the process by provisioning and managing the subscriptions for you - no crypto required! Here's how to use Chainlink VRF V2 with 0xCord:
 
+### Supported networks
+
+##### `Testnets`
+
+| Network Name | Value          |
+|--------------|----------------|
+| Polygon Mumbai | polygon_mumbai |
+| Ethereum Sepolia      | sepolia        |
+| Avalanche Fuji         | fuji           |
+| BSC Testnet  | bsc_testnet    |
+| Fantom Testnet | fantom_testnet |
+| Arbitrum Goerli | arbitrum_goerli |
+
+##### `Mainnets`
+
+| Network Name | Value          |
+|--------------|----------------|
+| Ethereum | mainnet        |
+| BSC          | bsc            |
+| Avalanche    | avalanche      |
+| Polygon      | polygon        |
+| Fantom       | fantom         |
+| Arbitrum     | arbitrum       |
+
 ## Offchain API
 
 With 0xCord's offchain API, you can easily consume Chainlink VRF V2 through a simple RESTful JSON API call, bridging the gap between Web2 and decentralized Web3 infrastructure. This allows you to retrieve random numbers for your applications without the need for complex onchain interactions.
@@ -22,6 +46,7 @@ To get started with the offchain API, follow these steps:
 
 1. Copy the API key from the "Fetch Config Vars" section in the 0xCord app. This API key will be used to access the 0xCord RESTful JSON API. [More info](/api-reference/authentication).
 2. In your API client, make a POST request to the "Request Random Number" API call, specifying the desired `network` and the number of random numbers to generate using the `numWords` parameter. For example:
+
 
 ```bash
 curl --request POST \
@@ -45,7 +70,7 @@ The returned random numbers are provably verifiable on-chain and ready to use in
 
 <Card
   title="API Reference"
-  href="api-reference/chainlink-vrf-v2/request-random-numbers"
+  href="/api-reference/chainlink-vrf-v2/request-random-numbers"
 >
   Learn more about the API endpoint for requesting random numbers
 </Card>
@@ -111,8 +136,14 @@ To link your consumer to the subscription, you have two options:
        You can now starting consuming random numbers from your smart contract!  
 
       <Card
-        title="API Reference"
-        href="api-reference/chainlink-vrf-v2/add-consumer"
+        title="API Reference (adding comsumers)"
+        href="/api-reference/chainlink-vrf-v2/add-consumer"
       >
         Learn more about the API endpoint for adding consumers
+      </Card>
+      <Card
+        title="API Reference (removing comsumers)"
+        href="/api-reference/chainlink-vrf-v2/remove-consumer"
+      >
+        Learn more about the API endpoint for remove consumers
       </Card>

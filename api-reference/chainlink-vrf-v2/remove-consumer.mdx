@@ -6,12 +6,9 @@ api: "POST https://0xcord.com/api/vrfv2/removeConsumer"
 
 ## Params
 
-<ParamField query="dappId" type="integer" required>
-  The ID of the dapp to which the consumer will be unlinked
-</ParamField>
-
 <ParamField query="network" type="string" required>
-  The blockchain network where the consumer will be unlinked (e.g., polygon_mumbai, mainnet)
+  The blockchain network where the consumer will be unlinked (e.g.,
+  polygon_mumbai, mainnet)
 </ParamField>
 
 <ParamField query="consumer" type="string" required>
@@ -29,9 +26,6 @@ api: "POST https://0xcord.com/api/vrfv2/removeConsumer"
   </ResponseField>
 </ResponseField>
 
-<Card
-  title="Chainlink VRF V2 Tutorial"
-  href="/infrastructure/chainlink-vrf-v2"
->
+<Card title="Chainlink VRF V2 Tutorial" href="/infrastructure/chainlink-vrf-v2">
   Learn how to integrate Chainlink VRF V2 with 0xCord
 </Card>
