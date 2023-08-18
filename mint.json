@@ -73,10 +73,20 @@
       ]
     },
     {
+      "group": "Presets",
+      "pages": [
+        "api-reference/presets/coinflip",
+        "api-reference/presets/range",
+        "api-reference/presets/lotto",
+        "api-reference/presets/nDice"
+      ]
+    },
+    {
        "group": "Infrastructure",
        "pages": [
          "infrastructure/chainlink-vrf-v2",
-         "infrastructure/chainlink-functions"
+         "infrastructure/chainlink-functions",
+         "infrastructure/chainlink-presets"
        ]
      }
   ],

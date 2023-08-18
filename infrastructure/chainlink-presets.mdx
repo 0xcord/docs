@@ -1,0 +1,185 @@
+---
+title: Presets
+description: Learn how to use Presets our inhouse combination of Chainlink VRF V2 & Chainlink Functions.
+---
+
+Welcome to the get started tutorial for Presets with 0xCord! In this tutorial, we will walk you through the process of integrating Presets our internally developed Chainlink VRF V2 and Chainlink Functions combination into your decentralized applications using the powerful infrastructure provided by 0xCord.
+
+## What are Presets?
+
+Presets at a high level use Chainlink VRF V2 to generate a random number to later be used as an input for a Chainlink Function. This allows you to generate and consume random numbers all in a decentralized and provable manner with the convenience of a single API call.
+
+## Offchain API
+
+With 0xCord's Presets offchain API, you can easily consume Chainlink VRF V2 and Chainlink Functions through a simple RESTful JSON API call, bridging the gap between Web2 and decentralized Web3 infrastructure. This allows you to retrieve random numbers and execute external computations for your applications without the need for complex onchain interactions.
+
+## Prerequisites
+
+To get started with Chainlink VRF V2 and Chainlink Functions and 0xCord, you will need the following:
+
+- An account on 0xCord.com: Sign up for an account on [0xCord.com](https://0xCord.com) to access the infrastructure and services provided by 0xCord.
+- Add the Preset to your dapp to get your api key: Follow the steps outlined in the [Get started](/hello-world) page to provision Chainlink Functions for your application.
+
+### Supported networks
+
+##### `Testnets`
+
+| Network Name     | Value          |
+| ---------------- | -------------- |
+| Polygon Mumbai   | polygon_mumbai |
+| Ethereum Sepolia | sepolia        |
+| Avalanche Fuji   | fuji           |
+
+### Supported Presets
+
+- **Coinflip**: Returns a random number between 0 and 1. This preset is useful for generating a random boolean value, where 0 represents false and 1 represents true.
+- **Range**: Returns a random number between a min and a max. This preset is useful for generating a random number within a specific range, such as for a game or simulation.
+- **Lotto**: Returns a string with the N amount of winners comma separated. This preset is useful for selecting random winners from a list of participants, such as for a raffle or contest.
+- **nDice**: Returns n amount of dice rolls for k amount of dice faces (the max amount of rolls is 100). This preset is useful for simulating dice rolls in a game or for generating random numbers with a specific distribution.
+
+### Using the Offchain API
+
+To get started with the offchain API add your api key to the header of your request, followed by the body parameters of the preset you want to use.
+
+**Coinflip**: Returns a random number between 0 and 1
+
+```bash
+curl --request POST \
+  --url 'https://0xcord.com/api/vrfv2/presets?network=sepolia&preset=coinflip' \
+  --header 'Authorization: <apiKey>'
+```
+
+```json
+{
+  "data": {
+    "success": true,
+    "vrfv2Hash": "0xbceaa0598717c3ebf11feb742be075cf540130e899e196de959acc766579dd6b",
+    "vrfv2EventHash": "https://sepolia.etherscan.io/tx/0x9d1518e8f8c706084dd5d54a05cb4b2a50ae5907f7a3a5805c1d80495aeabda0#eventlog",
+    "requestId": "0xebbeace01a4af11d4811aebb501c35aef772ffd418a1b5e6d4b9206ce6dd64ca",
+    "result": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "parsedResult": "0",
+    "err": "0x",
+    "url": "https://sepolia.etherscan.io/tx/0x3d66bd4cbe5acdcb39e204bcc0d7cfa6a053ce56f8d74dbc497f384bad7bc24c"
+  }
+}
+```
+
+<Card title="Coinflip API Reference" href="/api-reference/presets/coinflip">
+  Learn more about the API endpoint for using the coinflip preset
+</Card>
+
+**Range**: Returns a random number between a min and a max. For this one you must provide the min and max values in the body of the request.
+
+Body params:
+
+- `min`: The minimum value of the range.
+- `max`: The maximum value of the range.
+
+```bash
+curl --request POST \
+  --url 'https://0xcord.com/api/vrfv2/presets?network=fuji&preset=range' \
+  --header 'Authorization: <apiKey>' \
+  --data '{
+    "min": "1",
+    "max": "100"
+}'
+```
+
+response:
+
+```json
+{
+  "data": {
+    "success": true,
+    "vrfv2Hash": "0x97abfd675f6a63b70435edac4487314d18e747be6d344449f96b0390f1364713",
+    "vrfv2EventHash": "https://testnet.snowtrace.io/tx/0x381c0b2cdac71cdfc338904723e1b33d6eed60063bb3050a23c1f5819a4790f9#eventlog",
+    "requestId": "0xab07cb10b64cdcf08db9d8d68abfa0c69b08e848a3168d972c112d3152307f53",
+    "result": "0x0000000000000000000000000000000000000000000000000000000000000027",
+    "parsedResult": "39",
+    "err": "0x",
+    "url": "https://testnet.snowtrace.io/tx/0xeb66f4f981d7c65b93ee13b6eafd66c4937943f66097ad9aed628047745f633b"
+  }
+}
+```
+
+<Card title="Range API Reference" href="/api-reference/presets/range">
+  Learn more about the API endpoint for using the range preset
+</Card>
+
+**Lotto**: Retuns a string with the N amount of winners comma separated
+
+Body params:
+
+- `numberOfWinners`: The amount of winners you want to get.
+- `list`: The list of participants.
+
+```bash
+curl --request POST \
+  --url 'https://0xcord.com/api/vrfv2/presets?network=sepolia&preset=lotto' \
+  --header 'Authorization: <apiKey>' \
+  --data '{
+    "numberOfWinners": "2",
+    "list": ["Adam", "Bradley", "Charlie", "David", "Edward", "Frank", "Gilad"]
+}'
+```
+
+response:
+
+```json
+{
+  "data": {
+    "success": true,
+    "vrfv2Hash": "0x88363d4255a1939ce7d147853a5abc22ac5037f6abcb3b41d21782984aeb79c7",
+    "vrfv2EventHash": "https://sepolia.etherscan.io/tx/0x86526e37b0cc0db33cd94381e0b60d41f1959f9756600cd87baa996c07cd14bc#eventlog",
+    "requestId": "0xa139cb4a9e8cd3a44d19d5830a3c6d113f3edfc1ebfb8fbe2e60279c9faafe70",
+    "result": "0x5468652077696e6e657273206172652047696c61642c20456477617264",
+    "parsedResult": "The winners are Gilad, Edward",
+    "err": "0x",
+    "url": "https://sepolia.etherscan.io/tx/0x3c99c0d906fcb31c1c8420c7361fb9a992f66ac2132779cb80c102f7a3038846"
+  }
+}
+```
+
+<Card title="Lotto API Reference" href="/api-reference/presets/lotto">
+  Learn more about the API endpoint for using the lotto preset
+</Card>
+
+**nDice**: Retuns n amount of dice rolls for k amount of dice faces (the max amount of rolls is 100)
+
+Body params:
+
+- `numFaces`: The amount of faces the dice has.
+- `numDice`: The amount of dice you want to roll.
+
+eg: This will throw a 20 faced dice 10 times
+
+```bash
+curl --request POST \
+  --url 'https://0xcord.com/api/vrfv2/presets?network=fuji&preset=nDice' \
+  --header 'Authorization: <apiKey>' \
+  --data '{
+    "numFaces": "20",
+    "numDice": "10"
+}'
+```
+
+response:
+
+```json
+{
+  "data": {
+    "success": true,
+    "vrfv2Hash": "0xe7afe70e9cbae2c04af85556765aa977392d22b02d545307131aee96a9fd7ed1",
+    "vrfv2EventHash": "https://testnet.snowtrace.io/tx/0x7a44aefc5d08efcd4c5874b05704a4606f3ecf842a8580241aafc1272aa8d548#eventlog",
+    "requestId": "0x539ee0c3d4035bb254aa7f7276ef16478fa492a72d06c8543f65ce3b96591f48",
+    "result": "0x5b31342c31352c332c31382c31332c31362c31352c352c31322c31345d",
+    "parsedResult": "[14,15,3,18,13,16,15,5,12,14]",
+    "err": "0x",
+    "url": "https://testnet.snowtrace.io/tx/0x3cf81f77fbe7267b8ead97c85e6f4b02b38e30e7c35baae7398c5986a83863b0"
+  }
+}
+```
+
+<Card title="nDice API Reference" href="/api-reference/presets/nDice">
+  Learn more about the API endpoint for using the nDice preset
+</Card>
