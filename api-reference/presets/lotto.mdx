@@ -1,19 +1,44 @@
 ---
 title: Lotto Preset
-description: API endpoint for interacting with 0xCord's Lotto Preset 
-api: "POST https://0xcord.com/api/vrfv2/preset?network=fuji&preset=lotto"
+description: API endpoint for interacting with 0xCord's Lotto Preset
+api: "POST https://0xcord.com/api/vrfv2/presets"
 ---
 
 ## Params
 
-<ParamField query="network" type="string" default="fuji" required>
-  The blockchain network to retrieve random numbers from. Available options are `mumbai`,`fuji` and `sepolia`.
+<ParamField
+  body="network"
+  type="string"
+  default="polygon_mumbai"
+  initialValue="polygon_mumbai"
+  required
+>
+  The blockchain network to retrieve random numbers from. Available options are
+  `polygon_mumbai`,`fuji` and `sepolia`.
 </ParamField>
-<ParamField query="numberOfWinners" type="string" default="2" required>
-The amount of winners you want to get.
+
+<ParamField
+  body="preset"
+  type="string"
+  default="lotto"
+  initialValue="lotto"
+  required
+>
+  The preset to be used.
 </ParamField>
-<ParamField query="list" type="array" required>
-The list of participants or options in string format. eg:  ["Adam", "Bradley", "Charlie", "David", "Edward", "Frank"]
+
+<ParamField
+  body="numberOfWinners"
+  type="string"
+  default="1"
+  initialValue="1"
+  required
+>
+  The amount of winners you want to get.
+</ParamField>
+<ParamField body="list" type="array" required>
+  The list of participants or options in string format. eg: ["Adam", "Bradley",
+  "Charlie", "David", "Edward", "Frank"]
 </ParamField>
 
 ## Response

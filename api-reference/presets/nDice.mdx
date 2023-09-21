@@ -1,19 +1,48 @@
 ---
 title: nDice Preset
-description: API endpoint for interacting with 0xCord's nDice Preset 
-api: "POST https://0xcord.com/api/vrfv2/preset?network=fuji&preset=nDice"
+description: API endpoint for interacting with 0xCord's nDice Preset
+api: "POST https://0xcord.com/api/vrfv2/presets"
 ---
 
 ## Params
 
-<ParamField query="network" type="string" default="fuji" required>
-  The blockchain network to retrieve random numbers from. Available options are `mumbai`,`fuji` and `sepolia`.
+<ParamField
+  body="network"
+  type="string"
+  default="polygon_mumbai"
+  initialValue="polygon_mumbai"
+  required
+>
+  The blockchain network to retrieve random numbers from. Available options are
+  `polygon_mumbai`,`fuji` and `sepolia`.
 </ParamField>
-<ParamField query="numFaces" type="string" default="20" required>
-The amount of faces the dice has.
+
+<ParamField
+  body="preset"
+  type="string"
+  default="nDice"
+  initialValue="nDice"
+  required
+>
+  The preset to be used.
 </ParamField>
-<ParamField query="numDice" type="string" default="10" required>
-The amount of dice you want to roll.
+<ParamField
+  body="numFaces"
+  type="string"
+  default="20"
+  initialValue="20"
+  required
+>
+  The amount of faces the dice has.
+</ParamField>
+<ParamField
+  body="numDice"
+  type="string"
+  default="10"
+  initialValue="10"
+  required
+>
+  The amount of dice you want to roll.
 </ParamField>
 
 ## Response
